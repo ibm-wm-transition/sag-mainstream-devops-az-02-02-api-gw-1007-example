@@ -69,7 +69,7 @@ jobs:
 
     # Containerize
     - script: ./06.containerize.sh
-      displayName: 'Containerize MSR Adapter Set 1'
+      displayName: 'Containerize APIGw 10.7'
 
     # Service Principal is required to connect to ACR
     - task: DownloadSecureFile@1

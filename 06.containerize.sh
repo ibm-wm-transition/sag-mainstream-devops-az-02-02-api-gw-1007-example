@@ -4,6 +4,10 @@
 . ./setEnv.sh
 . "${SUIF_CACHE_HOME}/01.scripts/commonFunctions.sh"
 
+logI "Setting necessary kernel parameters..."
+
+sudo ./setKernelParams.sh
+
 logI "Downloading the build from SUIF..."
 
 huntForSuifFile "05.docker-image-builders/APIGateway/1007/minimal/multi-stage-1" "Dockerfile" || exit 1
@@ -25,7 +29,7 @@ export JOB_CONTAINER_MAIN_TAG="${JOB_CONTAINER_BASE_TAG}_BUILD_${JOB_DATETIME}"
 echo "##vso[task.setvariable variable=JOB_CONTAINER_MAIN_TAG;]${JOB_CONTAINER_MAIN_TAG}"
 echo "##vso[task.setvariable variable=JOB_CONTAINER_BASE_TAG;]${JOB_CONTAINER_BASE_TAG}"
 
-cd /tmp/build_context
+cd /tmp/build_context || exit 4
 
 logI "Building container"
 buildah \
@@ -33,6 +37,7 @@ buildah \
   --storage-opt ignore_chown_errors=true \
   bud --format docker \
   --build-arg __user_group_id=${MY_SAG_USER_GROUP_ID} \
+  --build-arg __suif_tag=${JOB_SUIF_TAG} \
   -t "${JOB_CONTAINER_MAIN_TAG}" || exit 3
 
 logI "Container image JOB_CONTAINER_MAIN_TAG built"
