@@ -40,4 +40,4 @@ buildah \
   --build-arg __suif_tag=${JOB_SUIF_TAG} \
   -t "${JOB_CONTAINER_MAIN_TAG}" || exit 3
 
-logI "Container image JOB_CONTAINER_MAIN_TAG built"
+logI "Container image ${JOB_CONTAINER_MAIN_TAG} built"
