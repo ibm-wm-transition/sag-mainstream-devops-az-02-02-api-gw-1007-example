@@ -1,4 +1,6 @@
-# Software AG Mainstream DevOps Example: API Gateway 10.7 Custom Image Multi Stage Build Pipeline
+# MOVING - Software AG Mainstream DevOps Example: API Gateway 10.7 Custom Image Multi Stage Build Pipeline
+
+# This repo will be moved away from the Software AG organization
 
 ## Prerequisites
 
